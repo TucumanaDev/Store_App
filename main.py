@@ -3,10 +3,11 @@ from tkinter import messagebox
 import tkinter as tk
 from connect import Connection
 from masterpanel import MasterPanel
+from login_register import LoginPanel
 
 class LoginUser():
-    _SELECT = "select name, lastname, rol, passwd from users where name=%s and passwd=%s"
-    _iNSERT = ""
+    # Cambiar la consulta 
+    _SELECT = "select * from users where name=%s and password=%s"
     _validation = False
     
     def selectUser(self, username_data, password_data):
@@ -21,6 +22,10 @@ class LoginUser():
             self.root.destroy()
             MasterPanel()
             return register
+
+    def register_user(self):
+        LoginPanel()
+
 
 
     def __init__(self):
@@ -71,8 +76,6 @@ class LoginUser():
         reg =self.selectUser(self.username_data, self.password_data)
         print(reg)
 
-    def register_user(self):
-        pass
 
 if __name__ == "__main__":
     LoginUser()
