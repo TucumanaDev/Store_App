@@ -1,18 +1,26 @@
 from tkinter import * 
+from tkinter import messagebox
 import tkinter as tk
 from connect import Connection
+from masterpanel import MasterPanel
 
 class LoginUser():
     _SELECT = "select name, lastname, rol, passwd from users where name=%s and passwd=%s"
     _iNSERT = ""
+    _validation = False
     
-    @classmethod
-    def selectUser(cls, username_data, password_data):
+    def selectUser(self, username_data, password_data):
         cursor = Connection.getCursor()
         values = (username_data, password_data)
-        cursor.execute(cls._SELECT, values)
+        cursor.execute(self._SELECT, values)
         register = cursor.fetchone()
-        return register
+        if register is None:
+            messagebox.showerror(message="Usuario o Contraseña incorrectos", title="Error")
+        
+        else:
+            self.root.destroy()
+            MasterPanel()
+            return register
 
 
     def __init__(self):
@@ -21,6 +29,9 @@ class LoginUser():
         self.root.geometry("900x500")
         self.root.resizable(False, False)
 
+        if LoginUser._validation == True:
+            self.root.destroy()
+            MasterPanel()
         
         self.username = StringVar()
         self.password = StringVar()
@@ -57,7 +68,7 @@ class LoginUser():
         self.password_data = str(self.password.get())
         print("Usuario: {}\n" 
             "Contraseña: {}".format(self.username_data, self.password_data))
-        reg =LoginUser.selectUser(self.username_data, self.password_data)
+        reg =self.selectUser(self.username_data, self.password_data)
         print(reg)
 
     def register_user(self):
