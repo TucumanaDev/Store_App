@@ -19,7 +19,7 @@ class LoginPanel:
         print(usuario)
 
         insert_user = self.insertUser(usuario.name, usuario.lastname, usuario.ci, usuario.password, usuario.rol)
-        print(insert_user)
+        print(  insert_user)
 
     def insertUser(self, user, lastname, ci, password, rol):
         with Connection.getConnection():
