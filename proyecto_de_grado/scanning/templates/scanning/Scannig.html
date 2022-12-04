@@ -1,0 +1,41 @@
+<html>
+<head>
+    {% load static %}
+    <link href= "{% static 'scanning/css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+    <video muted autoplay loop class="video-bg">
+        <source src="{% static 'scanning/video/wp-scan.mp4' %}" type="video/mp4">
+    </video>
+    <div id="cuerpo" class="scan">
+        <div class="title-app">
+            <h1>Introduce una IP </h1>
+        </div>
+        <div class="title">
+            <h1>Escaneo Web</h1>
+        </div>    
+        <div class="ip-form">
+            <form id="direccion" class="ip_ack" action="/scanning/" method="POST"> {% csrf_token %}
+                <input type="text" name="ip" class="ip-input" pattern="[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"/>
+                <br><br><br>
+                <input type="submit" value="Escanear" class="send-buttom" />
+            </form>
+        </div>
+        
+        <div class="result"> 
+            {{scan}}
+        </div>
+        <br><br>
+
+        <div class="ports">
+            {% for port in ports%}
+            <ol style="list-style: none;">
+                <li>{{port}}</li>
+            </ol>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</body>
+</html>         
