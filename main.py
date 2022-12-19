@@ -80,4 +80,5 @@ class LoginUser():
 if __name__ == "__main__":
     LoginUser()
     
-# Algunas variables no era reconocidas correctamente por la ausencia de "self" 
+# Algunas variables no era reconocidas correctamente por la ausencia de "self"
+#añadiendo un comentario de prueba para comprobar funcionamiento de github. 
