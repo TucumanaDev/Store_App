@@ -13,7 +13,7 @@ try:
     with connection:
         with connection.cursor() as cursor:
             query = "select * from users where name=%s and passwd=%s"
-            values = ('natalia', ,)
+            #values = ('natalia', ,)
             cursor.execute(query, values)
             registers = cursor.rowcount
             print(registers)

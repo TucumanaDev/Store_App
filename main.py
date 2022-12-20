@@ -7,7 +7,7 @@ from login_register import LoginPanel
 
 class LoginUser():
     # Cambiar la consulta 
-    _SELECT = "select * from users where name=%s and password=%s"
+    _SELECT = "select * from users where name=%s and passwd=%s"
     _validation = False
     
     def selectUser(self, username_data, password_data):

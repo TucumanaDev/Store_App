@@ -6,20 +6,7 @@ from user import User
 
 class LoginPanel:
 
-    _INSERT = "insert into users(name, lastname, ci, password, rol) values (%s, %s, %s, %s, %s)"
-    def register_user(self):
-        self.user = self.username.get()
-        self.lstname = self.lastname.get()
-        self.carnet = self.ci.get()
-        self.passwd = self.password.get()
-
-        print ("Nombre: {}\nApellido: {}\nCarnet: {}\nPassword: {}".format(self.user, self.lstname, self.carnet, self.passwd))
-
-        usuario = User(name=self.user, lastaname=self.lstname, ci=self.carnet, password=self.passwd)
-        print(usuario)
-
-        insert_user = self.insertUser(usuario.name, usuario.lastname, usuario.ci, usuario.password, usuario.rol)
-        print(  insert_user)
+    _INSERT = "insert into users(name, lastname, ci, passwd, rol) values (%s, %s, %s, %s, %s)"
 
     def insertUser(self, user, lastname, ci, password, rol):
         with Connection.getConnection():
@@ -48,7 +35,7 @@ class LoginPanel:
 
         text_field_usr = Entry(self.root, justify="center", width=21, font=("poppins", 25, "bold"), bg="#404040", border=0, fg="white", textvariable=self.username)
         text_field_usr.place(x=50, y=190)
-        text_field_usr.focus()
+        text_field_usr.focus() 
 
         label_lstnm = Label(self.root, text="Carnet de identidad", font=("Helvetica", 10, 'bold'), fg="black")
         label_lstnm.place(x=450, y=160)
@@ -72,11 +59,25 @@ class LoginPanel:
         text_field_passwd.place(x=450, y=290)
         text_field_passwd.focus()       
 
-        send_data = Button(self.root, text="Registrar", font=("poppins", 20, "bold"), bg="black", fg="grey", command=self.register_user)
+        send_data = Button(self.root, text="Registrar", font=("poppins", 20, "bold"), bg="black", fg="grey", command = self.register_user)
         send_data.place(x=360, y=370)
 
         self.root.mainloop()
 
 
+    def register_user(self):
+        self.user = self.username.get()
+        self.lstname = self.lastname.get()
+        self.carnet = self.ci.get()
+        self.passwd = self.password.get()
+
+        print ("Nombre: {}\nApellido: {}\nCarnet: {}\nPassword: {}".format(self.user, self.lstname, self.carnet, self.passwd))
+
+        usuario = User(name=self.user, lastaname=self.lstname, ci=self.carnet, password=self.passwd)
+        print(usuario)
+
+        insert_user = self.insertUser(usuario.name, usuario.lastname, usuario.ci, usuario.password, usuario.rol)
+        print(  insert_user)        
 if __name__ == '__main__':
     LoginPanel()
+    
